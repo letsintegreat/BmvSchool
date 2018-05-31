@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "730688536847",
+    "firebase_url": "https://bmvschool-5699c.firebaseio.com",
+    "project_id": "bmvschool-5699c",
+    "storage_bucket": "bmvschool-5699c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730688536847:android:fb437f49febdf6d2",
+        "android_client_info": {
+          "package_name": "com.school.seksaria.bmv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730688536847-7qkl88garj1qh87tidm2q3pph6mp36om.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdFU9gauxwXbmWXC3Wrdc0ia0P7sRMt4s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

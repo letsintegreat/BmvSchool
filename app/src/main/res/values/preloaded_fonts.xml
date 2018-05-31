@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/cabin_sketch</item>
+        <item>@font/cookie</item>
+        <item>@font/gloria_hallelujah</item>
+        <item>@font/pacifico</item>
+        <item>@font/quicksand</item>
+        <item>@font/raleway</item>
+        <item>@font/skranji</item>
+    </array>
+</resources>
