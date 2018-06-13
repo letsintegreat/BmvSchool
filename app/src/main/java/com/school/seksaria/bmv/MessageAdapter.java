@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MessageAdapter extends ArrayAdapter<Message> {
-    public MessageAdapter(Context context, int resource, List<Message> objects) {
+public class MessageAdapter extends ArrayAdapter<UserMessage> {
+    public MessageAdapter(Context context, int resource, List<UserMessage> objects) {
         super(context, resource, objects);
     }
 
@@ -23,7 +23,7 @@ public class MessageAdapter extends ArrayAdapter<Message> {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_message, parent, false);
         }
 
-        Message message = getItem(position);
+        UserMessage message = getItem(position);
 
         TextView messageTextView = (TextView) convertView.findViewById(R.id.message_text_view);
         TextView nameTextView = (TextView) convertView.findViewById(R.id.name_text_view);

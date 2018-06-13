@@ -5,24 +5,11 @@
     tools:context=".MainActivity">
 
     <item
-        android:title="Main Menu"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_more_vert_black_24dp">
+        android:id="@+id/sign_out"
+        android:title="Sign-out"/>
 
-        <menu>
-
-            <item
-                android:id="@+id/sign_out"
-                android:icon="@drawable/ic_exit_to_app_black_24dp"
-                android:title="Sign-out"/>
-
-            <item
-                android:id="@+id/change_password"
-                android:icon="@drawable/ic_build_black_24dp"
-                android:title="Change Password"/>
-
-        </menu>
-
-    </item>
+    <item
+        android:id="@+id/change_password"
+        android:title="Change Password"/>
 
 </menu>

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -118,7 +119,8 @@ public class AuthActivity extends AppCompatActivity {
                                                     "student",
                                                     false,
                                                     mFullNameEditText.getText().toString(),
-                                                    Integer.parseInt(mClassEditText.getText().toString())
+                                                    Integer.parseInt(mClassEditText.getText().toString()),
+                                                    FirebaseInstanceId.getInstance().getToken()
                                             ));
 
                                             // Asking Class Teacher for validating!
@@ -133,7 +135,8 @@ public class AuthActivity extends AppCompatActivity {
                                                             "student",
                                                             false,
                                                             mFullNameEditText.getText().toString(),
-                                                            Integer.parseInt(mClassEditText.getText().toString())
+                                                            Integer.parseInt(mClassEditText.getText().toString()),
+                                                            FirebaseInstanceId.getInstance().getToken()
                                                     ));
 
                                         } else if (radioGroup.getCheckedRadioButtonId() == R.id.teacher_radio_button) {
@@ -144,7 +147,8 @@ public class AuthActivity extends AppCompatActivity {
                                                     "teacher",
                                                     false,
                                                     mFullNameEditText.getText().toString(),
-                                                    Integer.parseInt(mClassEditText.getText().toString())
+                                                    Integer.parseInt(mClassEditText.getText().toString()),
+                                                    FirebaseInstanceId.getInstance().getToken()
                                             ));
 
                                             // Asking Class Teacher for validating!
@@ -158,7 +162,8 @@ public class AuthActivity extends AppCompatActivity {
                                                             "teacher",
                                                             false,
                                                             mFullNameEditText.getText().toString(),
-                                                            Integer.parseInt(mClassEditText.getText().toString())
+                                                            Integer.parseInt(mClassEditText.getText().toString()),
+                                                            FirebaseInstanceId.getInstance().getToken()
                                                     ));
 
                                         } else if (radioGroup.getCheckedRadioButtonId() == R.id.principal_radio_button) {
@@ -169,7 +174,8 @@ public class AuthActivity extends AppCompatActivity {
                                                     "principal",
                                                     false,
                                                     mFullNameEditText.getText().toString(),
-                                                    Integer.parseInt(mClassEditText.getText().toString())
+                                                    Integer.parseInt(mClassEditText.getText().toString()),
+                                                    FirebaseInstanceId.getInstance().getToken()
                                             ));
                                         } else {
                                             mUserDatabaseReference = mDatabase.getReference()
@@ -179,7 +185,8 @@ public class AuthActivity extends AppCompatActivity {
                                                     "monitor",
                                                     false,
                                                     mFullNameEditText.getText().toString(),
-                                                    Integer.parseInt(mClassEditText.getText().toString())
+                                                    Integer.parseInt(mClassEditText.getText().toString()),
+                                                    FirebaseInstanceId.getInstance().getToken()
                                             ));
 
                                             // Asking Class Teacher for validating!
@@ -194,7 +201,8 @@ public class AuthActivity extends AppCompatActivity {
                                                             "monitor",
                                                             false,
                                                             mFullNameEditText.getText().toString(),
-                                                            Integer.parseInt(mClassEditText.getText().toString())
+                                                            Integer.parseInt(mClassEditText.getText().toString()),
+                                                            FirebaseInstanceId.getInstance().getToken()
                                                     ));
 
                                         }

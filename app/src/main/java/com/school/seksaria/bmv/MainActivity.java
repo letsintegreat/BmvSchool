@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -158,6 +158,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, UserActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.request_card_view:
+
+                if (mUser.getWhat().equals("student") || mUser.getWhat().equals("monitor")) {
+                    Toast.makeText(MainActivity.this, "Access Denied", Toast.LENGTH_SHORT).show();;
+                } else if (mUser.getWhat().equals("teacher")) {
+                    intent = new Intent(this, RequestActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("what", "teacher");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
+                } else {
+                    intent = new Intent(this, RequestActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("what", "principal");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
 
             default: break;
         }

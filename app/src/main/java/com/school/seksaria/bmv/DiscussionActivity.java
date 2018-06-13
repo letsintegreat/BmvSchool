@@ -50,7 +50,7 @@ public class DiscussionActivity extends AppCompatActivity {
 
 
         ListView listView = (ListView) findViewById(R.id.list_view);
-        List<Message> messages = new ArrayList<>();
+        List<UserMessage> messages = new ArrayList<>();
         final MessageAdapter messageAdapter = new MessageAdapter(this, R.layout.item_message, messages);
         listView.setAdapter(messageAdapter);
 
@@ -77,7 +77,7 @@ public class DiscussionActivity extends AppCompatActivity {
                 mChatDatabaseReference.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Message message = dataSnapshot.getValue(Message.class);
+                        UserMessage message = dataSnapshot.getValue(UserMessage.class);
                         messageAdapter.add(message);
                     }
 
@@ -121,9 +121,8 @@ public class DiscussionActivity extends AppCompatActivity {
         findViewById(R.id.sendButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Message newMessage = new Message(mUser.getFullName(), messageEditText.getText().toString());
+                UserMessage newMessage = new UserMessage(mUser.getFullName(), messageEditText.getText().toString());
                 mChatDatabaseReference.push().setValue(newMessage);
-
                 messageEditText.setText("");
             }
         });

@@ -26,10 +26,13 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ClassTakerActivity"/>
+        <activity android:name=".ClassTakerActivity" />
 
-        <service android:name=".NotificationService" android:enabled="true" />
+        <service
+            android:name=".NotificationService"
+            android:enabled="true" />
 
+        <activity android:name=".RequestActivity"></activity>
     </application>
 
 </manifest>

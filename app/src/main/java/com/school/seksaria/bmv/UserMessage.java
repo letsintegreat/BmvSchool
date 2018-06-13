@@ -1,12 +1,12 @@
 package com.school.seksaria.bmv;
 
-public class Message {
+public class UserMessage {
     private String userName;
     private String messageContext;
 
-    public Message() {}
+    public UserMessage() {}
 
-    public Message(String tUserName, String tMessageContext) {
+    public UserMessage(String tUserName, String tMessageContext) {
         userName = tUserName;
         messageContext = tMessageContext;
     }

@@ -1,12 +1,10 @@
 package com.school.seksaria.bmv;
 
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.IBinder;
@@ -53,7 +51,7 @@ public class NotificationService extends Service {
                 mDiscussionDatabaseReference.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Message message = dataSnapshot.getValue(Message.class);
+                        UserMessage message = dataSnapshot.getValue(UserMessage.class);
 
                         if (mUser.getFullName() != message.getUserName()) {
                             Intent intent = new Intent(NotificationService.this, MainActivity.class);
