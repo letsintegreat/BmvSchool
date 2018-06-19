@@ -46,7 +46,7 @@
         android:fontFamily="@font/raleway"
         android:text="Authenticate Yourself!"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -59,7 +59,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/button"
-        android:text="Log-in"
+        android:text="Open an existing account"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/button"
-        android:text="Sign-up"
+        android:text="Create a new account"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -157,55 +157,57 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
         android:visibility="gone"
-        android:layout_marginTop="20dp"
         android:checkedButton="@+id/student_radio_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/class_edit_text">
-
-        <RadioButton
-            android:id="@+id/teacher_radio_button"
-            android:layout_width="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif-light"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Teacher" />
+        app:layout_constraintTop_toTopOf="@+id/class_edit_text">
 
         <RadioButton
             android:id="@+id/student_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:layout_weight="1"
             android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="Student"
             android:textColor="#fff"
-            android:textSize="20sp"
-            android:text="Student" />
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/monitor_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="Monitor"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/teacher_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="Teacher"
+            android:layout_marginTop="8dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
 
         <RadioButton
             android:id="@+id/principal_radio_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:fontFamily="sans-serif-light"
-            android:layout_marginTop="8dp"
+            android:text="Principal"
             android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:text="Principal" />
-
-        <RadioButton
-            android:id="@+id/monitor_radio_button"
-            android:layout_width="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-light"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Monitor" />
+            android:textSize="20sp" />
     </RadioGroup>
 
     <Button

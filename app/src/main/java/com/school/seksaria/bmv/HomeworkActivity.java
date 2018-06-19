@@ -156,7 +156,7 @@ public class HomeworkActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.add_homework_button) {
-            if (mUser.getWhat().equals("student") || mUser.getWhat().equals("principal")) {
+            if (mUser.getWhat().equals("student")) {
                 Toast.makeText(HomeworkActivity.this, "Access Denied", Toast.LENGTH_SHORT)
                         .show();
             } else {

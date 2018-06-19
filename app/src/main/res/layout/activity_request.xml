@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackgroundPrimary"
     tools:context=".RequestActivity">
 
     <android.support.v7.widget.Toolbar
@@ -17,7 +18,12 @@
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scrollbarStyle="outsideInset"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:dividerHeight="16dp"
         tools:listitem="@layout/item_request"/>
 
 </LinearLayout>

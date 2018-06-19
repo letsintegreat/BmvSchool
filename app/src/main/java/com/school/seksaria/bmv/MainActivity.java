@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         CardView homeworkCarView = (CardView) findViewById(R.id.homework_card_view);
         CardView holidayCardView = (CardView) findViewById(R.id.holiday_card_view);
         CardView usersCardView = (CardView) findViewById(R.id.users_card_view);
+        CardView requestCardView = (CardView) findViewById(R.id.request_card_view);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         homeworkCarView.setOnClickListener(this);
         holidayCardView.setOnClickListener(this);
         usersCardView.setOnClickListener(this);
+        requestCardView.setOnClickListener(this);
 
     }
 
@@ -162,14 +165,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.request_card_view:
 
                 if (mUser.getWhat().equals("student") || mUser.getWhat().equals("monitor")) {
-                    Toast.makeText(MainActivity.this, "Access Denied", Toast.LENGTH_SHORT).show();;
+                    Toast.makeText(MainActivity.this, "Access Denied", Toast.LENGTH_SHORT).show();
                 } else if (mUser.getWhat().equals("teacher")) {
                     intent = new Intent(this, RequestActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("what", "teacher");
                     intent.putExtras(bundle);
                     startActivity(intent);
-                    break;
                 } else {
                     intent = new Intent(this, RequestActivity.class);
                     Bundle bundle = new Bundle();
@@ -177,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
+                break;
 
             default: break;
         }
