@@ -1,13 +1,12 @@
 package com.school.seksaria.bmv;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,14 +27,11 @@ public class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private FirebaseDatabase mDatabase;
-    private DatabaseReference mUserDatabaseReference;
-    private DatabaseReference mResponseDatabaseReference;
+    private DatabaseReference mUserDatabaseReference,mResponseDatabaseReference;
 
-    private EditText mEmailEditText;
-    private EditText mPasswordEditText;
-    private EditText mFullNameEditText;
-    private EditText mClassEditText;
-    boolean pressed;
+    ConstraintLayout formPage, whatPage, startPage, splashPage;
+
+    private EditText mEmailEditText, mClassEditText, mFullNameEditText, mPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,66 +40,88 @@ public class AuthActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
+
+        Handler handler = new Handler();
+
+        formPage = (ConstraintLayout) findViewById(R.id.form_page);
+        startPage = (ConstraintLayout) findViewById(R.id.start_page);
+        whatPage = (ConstraintLayout) findViewById(R.id.what_page);
+        splashPage = (ConstraintLayout) findViewById(R.id.splash_screen);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                splashPage.animate().translationY(splashPage.getHeight());
+            }
+        }, 2050);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getSupportActionBar().show();
+                formPage.setVisibility(View.VISIBLE);
+                whatPage.setVisibility(View.VISIBLE);
+                startPage.setVisibility(View.VISIBLE);
+                startPage.animate().translationX(0);
+            }
+        }, 2500);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                formPage.animate().translationX((float) 1.0 * formPage.getWidth());
+                whatPage.animate().translationX((float) 1.0 * whatPage.getWidth());
+                startPage.animate().translationX((float) -1.0 * startPage.getWidth());
+            }
+        }, 2000);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        findViewById(R.id.email_edit_text).setVisibility(View.GONE);
-        findViewById(R.id.password_edit_text).setVisibility(View.GONE);
-        findViewById(R.id.class_edit_text).setVisibility(View.GONE);
-        findViewById(R.id.name_edit_text).setVisibility(View.GONE);
-        findViewById(R.id.radio_button).setVisibility(View.GONE);
-        findViewById(R.id.next_sign_in_button).setVisibility(View.GONE);
-        findViewById(R.id.email_edit_text).animate().translationY(findViewById(R.id.email_edit_text).getHeight()).alpha(0.0f);
-        findViewById(R.id.password_edit_text).animate().translationY(findViewById(R.id.password_edit_text).getHeight()).alpha(0.0f);
-        findViewById(R.id.class_edit_text).animate().translationY(findViewById(R.id.class_edit_text).getHeight()).alpha(0.0f);
-        findViewById(R.id.name_edit_text).animate().translationY(findViewById(R.id.name_edit_text).getHeight()).alpha(0.0f);
-        findViewById(R.id.radio_button).animate().translationY(findViewById(R.id.radio_button).getHeight()).alpha(0.0f);
-        findViewById(R.id.next_sign_in_button).animate().translationY(findViewById(R.id.next_sign_in_button).getHeight()).alpha(0.0f);
-
 
         Button signUpButton = (Button) findViewById(R.id.sign_up_button);
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(AuthActivity.this, " First OnClickListener Triggered", Toast.LENGTH_SHORT).show();
                 getSupportActionBar().setTitle("Sign-Up");
 
-                findViewById(R.id.auth_root_view).setBackgroundColor(getResources().getColor(R.color.colorBackground));
-                findViewById(R.id.heading_text_view).animate().translationY(findViewById(R.id.heading_text_view).getHeight()).alpha(0.0f);
-                findViewById(R.id.log_in_button).animate().translationY(findViewById(R.id.log_in_button).getHeight()).alpha(0.0f);
-                findViewById(R.id.sign_up_button).animate().translationY(findViewById(R.id.sign_up_button).getHeight()).alpha(0.0f);
-                findViewById(R.id.textView).animate().translationY(findViewById(R.id.textView).getHeight()).alpha(0.0f);
-                findViewById(R.id.email_edit_text).setVisibility(View.VISIBLE);
-                findViewById(R.id.password_edit_text).setVisibility(View.VISIBLE);
-                findViewById(R.id.class_edit_text).setVisibility(View.VISIBLE);
-                findViewById(R.id.name_edit_text).setVisibility(View.VISIBLE);
-                findViewById(R.id.next_sign_in_button).setVisibility(View.VISIBLE);
-                findViewById(R.id.email_edit_text).animate().alpha(1.0f);
-                findViewById(R.id.email_edit_text).animate().alpha(1.0f);
-                findViewById(R.id.password_edit_text).animate().alpha(1.0f);
-                findViewById(R.id.class_edit_text).animate().alpha(1.0f);
-                findViewById(R.id.name_edit_text).animate().alpha(1.0f);
-                findViewById(R.id.radio_button).animate().alpha(1.0f);
-                findViewById(R.id.next_sign_in_button).animate().alpha(1.0f);
+//                findViewById(R.id.auth_root_view).setBackgroundColor(getResources().getColor(R.color.colorBackground));
+//                findViewById(R.id.heading_text_view).animate().translationY(findViewById(R.id.heading_text_view).getHeight()).alpha(0.0f);
+//                findViewById(R.id.log_in_button).animate().translationY(findViewById(R.id.log_in_button).getHeight()).alpha(0.0f);
+//                findViewById(R.id.sign_up_button).animate().translationY(findViewById(R.id.sign_up_button).getHeight()).alpha(0.0f);
+//                findViewById(R.id.textView).animate().translationY(findViewById(R.id.textView).getHeight()).alpha(0.0f);
+//                findViewById(R.id.email_edit_text).setVisibility(View.VISIBLE);
+//                findViewById(R.id.password_edit_text).setVisibility(View.VISIBLE);
+//                findViewById(R.id.class_edit_text).setVisibility(View.VISIBLE);
+//                findViewById(R.id.name_edit_text).setVisibility(View.VISIBLE);
+//                findViewById(R.id.next_sign_in_button).setVisibility(View.VISIBLE);
+//                findViewById(R.id.email_edit_text).animate().alpha(1.0f);
+//                findViewById(R.id.email_edit_text).animate().alpha(1.0f);
+//                findViewById(R.id.password_edit_text).animate().alpha(1.0f);
+//                findViewById(R.id.class_edit_text).animate().alpha(1.0f);
+//                findViewById(R.id.name_edit_text).animate().alpha(1.0f);
+//                findViewById(R.id.radio_button).animate().alpha(1.0f);
+//                findViewById(R.id.next_sign_in_button).animate().alpha(1.0f);
+//
+//                findViewById(R.id.email_edit_text).animate().rotation(360).setDuration(1000);
+//                findViewById(R.id.email_edit_text).animate().rotation(360).setDuration(1000);
+//                findViewById(R.id.password_edit_text).animate().rotation(360).setDuration(1000);
+//                findViewById(R.id.class_edit_text).animate().rotation(360).setDuration(1000);
+//                findViewById(R.id.name_edit_text).animate().rotation(360).setDuration(1000);
+//                findViewById(R.id.next_sign_in_button).animate().rotation(360).setDuration(1000);
+//
+//                mEmailEditText = (EditText) findViewById(R.id.email_edit_text);
+//                mPasswordEditText = (EditText) findViewById(R.id.password_edit_text);
+//                mFullNameEditText = (EditText) findViewById(R.id.name_edit_text);
+//                mClassEditText = (EditText) findViewById(R.id.class_edit_text);
 
-                findViewById(R.id.email_edit_text).animate().rotation(360).setDuration(1000);
-                findViewById(R.id.email_edit_text).animate().rotation(360).setDuration(1000);
-                findViewById(R.id.password_edit_text).animate().rotation(360).setDuration(1000);
-                findViewById(R.id.class_edit_text).animate().rotation(360).setDuration(1000);
-                findViewById(R.id.name_edit_text).animate().rotation(360).setDuration(1000);
-                findViewById(R.id.next_sign_in_button).animate().rotation(360).setDuration(1000);
+                startPage.animate().translationX((float) -1.0 * startPage.getWidth());
+                formPage.animate().translationX((float) 0);
 
-                mEmailEditText = (EditText) findViewById(R.id.email_edit_text);
-                mPasswordEditText = (EditText) findViewById(R.id.password_edit_text);
-                mFullNameEditText = (EditText) findViewById(R.id.name_edit_text);
-                mClassEditText = (EditText) findViewById(R.id.class_edit_text);
-
-                pressed = false;
                 findViewById(R.id.next_sign_in_button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        if (!pressed) {
 
                             boolean errorOccurred = false;
 
@@ -128,21 +146,14 @@ public class AuthActivity extends AppCompatActivity {
                             }
 
                             if (!errorOccurred) {
-
-                                pressed = true;
                                 findViewById(R.id.radio_button).setVisibility(View.VISIBLE);
-                                float translate = mEmailEditText.getHeight();
-
-                                mEmailEditText.animate().translationY(translate).alpha(0.0f);
-                                mPasswordEditText.animate().translationY(translate).alpha(0.0f);
-                                mFullNameEditText.animate().translationY(translate).alpha(0.0f);
-                                mClassEditText.animate().translationY(translate).alpha(0.0f);
-                                findViewById(R.id.radio_button).animate().rotation(360).setDuration(1000);
-
+                                formPage.animate().translationX((float) -1.0 * formPage.getWidth());
+                                whatPage.animate().translationX((float) 0);
                             }
 
-                        } else {
-
+                        findViewById(R.id.final_sign_in_button).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
                                 mAuth.createUserWithEmailAndPassword(
                                         mEmailEditText.getText().toString(),
                                         mPasswordEditText.getText().toString()
@@ -283,61 +294,62 @@ public class AuthActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                        }
+                            }
+                        });
                     }
                 });
             }
         });
 
         Button logInButton = (Button) findViewById(R.id.log_in_button);
-        logInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                getSupportActionBar().setTitle("Log-In");
-
-                findViewById(R.id.auth_root_view).setBackgroundColor(getResources().getColor(R.color.colorBackground));
-                findViewById(R.id.heading_text_view).setVisibility(View.GONE);
-                findViewById(R.id.log_in_button).setVisibility(View.GONE);
-                findViewById(R.id.textView).setVisibility(View.GONE);
-                findViewById(R.id.sign_up_button).setVisibility(View.GONE);
-                findViewById(R.id.email_edit_text).setVisibility(View.VISIBLE);
-                findViewById(R.id.password_edit_text).setVisibility(View.VISIBLE);
-                findViewById(R.id.next_sign_in_button).setVisibility(View.VISIBLE);
-
-                Button nextLogInButton = (Button) findViewById(R.id.next_sign_in_button);
-                nextLogInButton.setText("Log-in");
-
-                final EditText emailEditText = (EditText) findViewById(R.id.email_edit_text);
-                final EditText passwordEditText = (EditText) findViewById(R.id.password_edit_text);
-
-                nextLogInButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mAuth.signInWithEmailAndPassword(
-                                emailEditText.getText().toString(),
-                                passwordEditText.getText().toString()
-                        )
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()) {
-
-                                            Log.w("Authentication:failed", task.getException());
-                                            Toast.makeText(
-                                                    AuthActivity.this,
-                                                    "Authentication Failed",
-                                                    Toast.LENGTH_SHORT
-                                            ).show();
-                                        } else {
-                                            updateUI();
-                                        }
-                                    }
-                                });
-                    }
-                });
-            }
-        });
+//        logInButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                getSupportActionBar().setTitle("Log-In");
+//
+//                findViewById(R.id.auth_root_view).setBackgroundColor(getResources().getColor(R.color.colorBackground));
+//                findViewById(R.id.heading_text_view).setVisibility(View.GONE);
+//                findViewById(R.id.log_in_button).setVisibility(View.GONE);
+//                findViewById(R.id.textView).setVisibility(View.GONE);
+//                findViewById(R.id.sign_up_button).setVisibility(View.GONE);
+//                findViewById(R.id.email_edit_text).setVisibility(View.VISIBLE);
+//                findViewById(R.id.password_edit_text).setVisibility(View.VISIBLE);
+//                findViewById(R.id.next_sign_in_button).setVisibility(View.VISIBLE);
+//
+//                Button nextLogInButton = (Button) findViewById(R.id.next_sign_in_button);
+//                nextLogInButton.setText("Log-in");
+//
+//                final EditText emailEditText = (EditText) findViewById(R.id.email_edit_text);
+//                final EditText passwordEditText = (EditText) findViewById(R.id.password_edit_text);
+//
+//                nextLogInButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mAuth.signInWithEmailAndPassword(
+//                                emailEditText.getText().toString(),
+//                                passwordEditText.getText().toString()
+//                        )
+//                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                                        if (!task.isSuccessful()) {
+//
+//                                            Log.w("Authentication:failed", task.getException());
+//                                            Toast.makeText(
+//                                                    AuthActivity.this,
+//                                                    "Authentication Failed",
+//                                                    Toast.LENGTH_SHORT
+//                                            ).show();
+//                                        } else {
+//                                            updateUI();
+//                                        }
+//                                    }
+//                                });
+//                    }
+//                });
+//            }
+//        });
 
     }
 
