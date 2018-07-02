@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 public class MessageAdapter extends ArrayAdapter<UserMessage> {
+
     public MessageAdapter(Context context, int resource, List<UserMessage> objects) {
         super(context, resource, objects);
     }

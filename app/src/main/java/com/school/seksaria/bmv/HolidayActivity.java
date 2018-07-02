@@ -2,6 +2,8 @@ package com.school.seksaria.bmv;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +31,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-public class HolidayActivity extends AppCompatActivity {
+public class HolidayActivity extends AppCompatActivity implements DatePickerFragment.GetClass,
+        HolidayAdapter.Populate {
 
     private FirebaseUser mFirebaseUser;
     private User mUser;
@@ -36,6 +40,8 @@ public class HolidayActivity extends AppCompatActivity {
     private DatabaseReference mHolidayDatabaseReference;
     private ArrayList<String> tags = new ArrayList<>();
     private ArrayList<String> dates = new ArrayList<>();
+    private ConstraintLayout mainStuff, newStuff;
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,24 @@ public class HolidayActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mainStuff = (ConstraintLayout) findViewById(R.id.main_stuff);
+        newStuff = (ConstraintLayout) findViewById(R.id.new_stuff);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                newStuff.animate().translationX((float) 1.0 * newStuff.getWidth());
+            }
+        }, 500);
+
+        handler.postDelayed((new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.new_holiday_edit_text).setVisibility(View.VISIBLE);
+                findViewById(R.id.new_holiday_button).setVisibility(View.VISIBLE);
+            }
+        }), 1000);
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -116,9 +140,17 @@ public class HolidayActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 collectHoliday((Map<String, Object>) dataSnapshot.getValue());
-                GridView gridView = (GridView) findViewById(R.id.grid_view);
-                gridView.setAdapter(new HolidayAdapter(HolidayActivity.this, tags, dates, "holiday"));
-                findViewById(R.id.progressBar).setVisibility(View.GONE);
+                ListView gridView = (ListView) findViewById(R.id.grid_view);
+                gridView.setAdapter(new HolidayAdapter(HolidayActivity.this,
+                        R.layout.holiday_card,
+                        tags));
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        findViewById(R.id.progressBar).setVisibility(View.GONE);
+                    }
+                }, 1000);
             }
 
             @Override
@@ -163,5 +195,23 @@ public class HolidayActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "No Holidays found so far!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public int getNumberOfClass() {
+        return 0;
+    }
+
+    @Override
+    public ArrayList<String> getAdapterDates() {
+        return dates;
+    }
+
+    @Override
+    public ArrayList<String> getAdapterTags() {
+        return tags;
+    }
+
+    public String getAdapterWhat() {
+        return mUser.getWhat();
     }
 }

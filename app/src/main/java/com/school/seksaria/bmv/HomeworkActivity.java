@@ -1,6 +1,9 @@
 package com.school.seksaria.bmv;
 
 import android.app.DialogFragment;
+import android.content.Intent;
+import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +31,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-public class HomeworkActivity extends AppCompatActivity {
+public class HomeworkActivity extends AppCompatActivity implements DatePickerFragment.GetClass,
+        HolidayAdapter.Populate {
 
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mUserDatabaseReference;
@@ -36,6 +41,8 @@ public class HomeworkActivity extends AppCompatActivity {
     private ArrayList<String> tags = new ArrayList<>();
     private ArrayList<String> dates = new ArrayList<>();
     private int numberOfClass;
+    private Handler handler = new Handler();
+    private ConstraintLayout mainStuff, newStuff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,25 @@ public class HomeworkActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mainStuff = (ConstraintLayout) findViewById(R.id.main_stuff);
+        newStuff = (ConstraintLayout) findViewById(R.id.new_stuff);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                newStuff.animate().translationX((float) 1.0 * newStuff.getWidth());
+            }
+        }, 500);
+
+        handler.postDelayed((new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.new_subject_edit_text).setVisibility(View.VISIBLE);
+                findViewById(R.id.new_homework_edit_text).setVisibility(View.VISIBLE);
+                findViewById(R.id.new_homework_button).setVisibility(View.VISIBLE);
+            }
+        }), 1000);
 
         Bundle bundle = getIntent().getExtras();
         numberOfClass = bundle.getInt("class");
@@ -129,9 +155,18 @@ public class HomeworkActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         collectHomeworks((Map<String, Object>) dataSnapshot.getValue());
-                        GridView gridView = (GridView) findViewById(R.id.grid_view);
-                        gridView.setAdapter(new HolidayAdapter(HomeworkActivity.this, tags, dates, "homework"));
-                        findViewById(R.id.progressBar).setVisibility(View.GONE);
+                        ListView gridView = (ListView) findViewById(R.id.grid_view);
+
+                        gridView.setAdapter(new HolidayAdapter(HomeworkActivity.this,
+                                R.layout.holiday_card,
+                                tags));
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                findViewById(R.id.progressBar).setVisibility(View.GONE);
+                            }
+                        }, 1000);
                     }
 
                     @Override
@@ -181,5 +216,22 @@ public class HomeworkActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(HomeworkActivity.this, "No Homework given yet.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public int getNumberOfClass() {
+        Bundle bundle = getIntent().getExtras();
+        return bundle.getInt("class");
+    }
+
+    public String getAdapterWhat() {
+        return mUser.getWhat();
+    }
+
+    public ArrayList<String> getAdapterTags() {
+        return tags;
+    }
+
+    public ArrayList<String> getAdapterDates() {
+        return dates;
     }
 }

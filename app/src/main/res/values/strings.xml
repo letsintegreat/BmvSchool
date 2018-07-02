@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">B.M.V</string>
+    <string name="wait">Waiting for BMV Teachers to validate your account. As soon as any Teacher validates, Your account will get created!</string>
+    <string name="waitDes">As soon as any Teacher validates, Your account will get created!</string>
 </resources>

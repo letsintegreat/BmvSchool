@@ -22,21 +22,7 @@
         android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/splash_screen"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/splash"/>
-
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
             android:id="@+id/start_page"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -101,82 +87,50 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/what_page"
+            android:id="@+id/log-in_page"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="match_parent">
 
-            <RadioGroup
-                android:id="@+id/radio_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/log_email_edit_text"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="64dp"
-                android:checkedButton="@+id/student_radio_button"
+                android:layout_marginTop="90dp"
+                android:ems="10"
+                android:textColor="#F5F5F5"
+                android:background="@drawable/shape"
+                android:textColorHint="#999999"
+                android:hint="   E-Mail"
+                android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioButton
-                    android:id="@+id/student_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Student"
-                    android:buttonTint="#e75748"
-                    android:textColor="#fff"
-                    android:textSize="24sp" />
-
-                <RadioButton
-                    android:id="@+id/monitor_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Monitor"
-                    android:buttonTint="#e75748"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp" />
-
-                <RadioButton
-                    android:id="@+id/teacher_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Teacher"
-                    android:buttonTint="#e75748"
-                    android:layout_marginTop="8dp"
-                    android:paddingLeft="16dp"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp" />
-
-                <RadioButton
-                    android:id="@+id/principal_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingLeft="16dp"
-                    android:text="Principal"
-                    android:buttonTint="#e75748"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp" />
-            </RadioGroup>
+            <EditText
+                android:id="@+id/log_password_edit_text"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:textColor="#F5F5F5"
+                android:background="@drawable/shape"
+                android:textColorHint="#999999"
+                android:ems="10"
+                android:hint="   Password"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/log_email_edit_text" />
 
             <Button
-                android:id="@+id/final_sign_in_button"
+                android:id="@+id/log_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="Sign-up"
+                android:text="Log-in"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/button"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -186,10 +140,23 @@
         </android.support.constraint.ConstraintLayout>
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/form_page"
-            android:visibility="gone"
+            android:id="@+id/create_account_page"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/approved_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textAlignment="center"
+                android:fontFamily="@font/raleway"
+                android:textColor="#F5F5F5"
+                android:textSize="18sp"
+                android:text="Your Account Requested is Accepted "/>
 
             <EditText
                 android:id="@+id/email_edit_text"
@@ -206,7 +173,7 @@
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/approved_by" />
 
             <EditText
                 android:id="@+id/password_edit_text"
@@ -242,6 +209,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
 
+            <Button
+                android:id="@+id/create_sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="Sign-up"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/form_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <EditText
                 android:id="@+id/name_edit_text"
                 android:layout_width="250dp"
@@ -251,13 +236,13 @@
                 android:textColorHint="#999999"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="48dp"
                 android:ems="10"
                 android:hint="   Full Name"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cpassword_edit_text" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/class_edit_text"
@@ -276,8 +261,73 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
 
+            <RadioGroup
+                android:id="@+id/radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="64dp"
+                android:checkedButton="@+id/student_radio_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/class_edit_text">
+
+                <RadioButton
+                    android:id="@+id/student_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Student"
+                    android:buttonTint="#e75748"
+                    android:textColor="#fff"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/monitor_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Monitor"
+                    android:buttonTint="#e75748"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/teacher_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Teacher"
+                    android:buttonTint="#e75748"
+                    android:layout_marginTop="4dp"
+                    android:paddingLeft="16dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/principal_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-light"
+                    android:paddingLeft="16dp"
+                    android:text="Principal"
+                    android:buttonTint="#e75748"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </RadioGroup>
+
             <Button
-                android:id="@+id/next_sign_in_button"
+                android:id="@+id/final_sign_in_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
@@ -288,6 +338,87 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/waiting_page"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_assignment_ind_black_24dp" />
+
+            <TextView
+                android:id="@+id/rejected_by"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
+                android:textAlignment="center"
+                android:fontFamily="@font/raleway"
+                android:textColor="#F5F5F5"
+                android:textSize="18sp"
+                android:text="Rejected By: "/>
+
+            <TextView
+                android:id="@+id/wait_head"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/wait"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:textColor="#F5F5F5"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/rejected_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="Continue"
+                android:visibility="gone"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/splash_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ABFFEA"
+                android:scaleType="centerCrop"
+                android:src="@drawable/splash"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
     </RelativeLayout>

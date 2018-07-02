@@ -23,6 +23,7 @@
         android:scrollbarStyle="outsideInset"
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
+        android:divider="@android:color/transparent"
         android:dividerHeight="16dp"
         tools:listitem="@layout/item_request"/>
 

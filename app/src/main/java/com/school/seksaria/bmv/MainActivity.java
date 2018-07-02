@@ -1,7 +1,10 @@
 package com.school.seksaria.bmv;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private DatabaseReference mUserDatabaseReference;
     private User mUser;
+    String unique;
+    ConstraintLayout splashPage;
+    CardView discussionCardView, homeworkCarView, holidayCardView, usersCardView, requestCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +41,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        CardView discussionCardView = (CardView) findViewById(R.id.discussion_card_view);
-        CardView homeworkCarView = (CardView) findViewById(R.id.homework_card_view);
-        CardView holidayCardView = (CardView) findViewById(R.id.holiday_card_view);
-        CardView usersCardView = (CardView) findViewById(R.id.users_card_view);
-        CardView requestCardView = (CardView) findViewById(R.id.request_card_view);
+        unique = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        splashPage  = (ConstraintLayout) findViewById(R.id.splash_screen);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                discussionCardView.animate().translationX((float) -2.0 * discussionCardView.getWidth());
+                homeworkCarView.animate().translationX((float) 2.0 * discussionCardView.getWidth());
+                holidayCardView.animate().translationX((float) -2.0 * discussionCardView.getWidth());
+                usersCardView.animate().translationX((float) 2.0 * discussionCardView.getWidth());
+            }
+        }, 1000);
+
+        discussionCardView = (CardView) findViewById(R.id.discussion_card_view);
+        homeworkCarView = (CardView) findViewById(R.id.homework_card_view);
+        holidayCardView = (CardView) findViewById(R.id.holiday_card_view);
+        usersCardView = (CardView) findViewById(R.id.users_card_view);
+        requestCardView = (CardView) findViewById(R.id.request_card_view);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -48,6 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (mFirebaseAuth.getCurrentUser() == null) {
                     Intent intent = new Intent(MainActivity.this, AuthActivity.class);
                     startActivity(intent);
+                } else {
+                    try {
+                        FirebaseDatabase.getInstance()
+                                .getReference()
+                                .child("request")
+                                .child(unique)
+                                .removeValue();
+                    } catch (Exception e) {}
                 }
             }
         };
@@ -63,9 +93,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     mUser = dataSnapshot.getValue(User.class);
-                    findViewById(R.id.progress_bar).setVisibility(View.GONE);
-                    findViewById(R.id.app_bar).setVisibility(View.VISIBLE);
-                    findViewById(R.id.nested_scroll_view).setVisibility(View.VISIBLE);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            splashPage.animate().alpha(0);
+                        }
+                    }, 1500);
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            findViewById(R.id.app_bar).setVisibility(View.VISIBLE);
+                            discussionCardView.animate().translationX(0);
+                            homeworkCarView.animate().translationX(0);
+                            holidayCardView.animate().translationX(0);
+                            usersCardView.animate().translationX(0);
+                            requestCardView.setVisibility(View.VISIBLE);
+                        }
+                    }, 2500);
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError) {}
@@ -103,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.sign_out) {
             mFirebaseAuth.signOut();
+            stopService(new Intent(MainActivity.this, NotificationService.class));
             return true;
         } else {
             return super.onOptionsItemSelected(item);

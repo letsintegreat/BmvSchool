@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorRequestReject"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="32dp"
-    android:padding="8dp"
-    app:cardCornerRadius="16dp"
-    android:layout_height="150dp">
+    android:padding="16dp"
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <TextView
@@ -17,70 +21,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/gloria_hallelujah"
             android:paddingTop="8dp"
-            android:textColor="#2A2A2A"
-            android:textSize="20sp"
-            android:text="Harshit Seksaria"/>
+            android:text="Harshit Seksaria"
+            android:textColor="@color/colorRequestPri"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/what"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
             android:layout_gravity="center_horizontal"
-            android:text="wants to be a Student of"/>
+            android:fontFamily="@font/quicksand"
+            android:text="wants to be a Student of"
+            android:textColor="@color/colorBackground"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/class_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="#2A2A2A"
-            android:textSize="18sp"
-            android:text="Class 9"/>
+            android:fontFamily="@font/pacifico"
+            android:text="Class 9"
+            android:textColor="@color/colorRequestPri"
+            android:textSize="22sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="8dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="100dp"
-                app:cardCornerRadius="8dp"
-                android:layout_margin="16dp"
-                android:layout_height="30dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-monospace"
-                    android:text="Allow"/>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="100dp"
-                app:cardCornerRadius="8dp"
-                android:layout_margin="16dp"
-                android:layout_height="30dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:fontFamily="sans-serif-monospace"
-                    android:text="Reject"/>
-
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/skranji"
+            android:text="Tap to Reject" />
 
     </LinearLayout>
 
