@@ -9,19 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AuthActivity" />
-        <activity android:name=".DiscussionActivity" />
-        <activity android:name=".HomeworkActivity" />
-        <activity android:name=".HolidayActivity" />
-        <activity android:name=".UserActivity" />
-
+        <activity android:name=".AuthActivity" android:exported="false" />
+        <activity android:name=".DiscussionActivity" android:exported="false" />
+        <activity android:name=".HomeworkActivity" android:exported="false" />
+        <activity android:name=".HolidayActivity" android:exported="false" />
+        <activity android:name=".UserActivity" android:exported="false" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -33,6 +32,7 @@
             android:enabled="true" />
 
         <activity android:name=".RequestActivity"></activity>
+
     </application>
 
 </manifest>

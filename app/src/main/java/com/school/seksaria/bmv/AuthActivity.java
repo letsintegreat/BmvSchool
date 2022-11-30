@@ -3,11 +3,11 @@ package com.school.seksaria.bmv;
 import android.content.Intent;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -173,8 +172,7 @@ public class AuthActivity extends AppCompatActivity {
                             mResponseDatabaseReference.setValue(new User(
                                     isWhat,
                                     mFullNameEditText.getText().toString(),
-                                    Integer.parseInt(mClassEditText.getText().toString()),
-                                    FirebaseInstanceId.getInstance().getToken()
+                                    Integer.parseInt(mClassEditText.getText().toString())
                             ));
 
                             waitingPage.animate().translationX(0);
@@ -316,6 +314,7 @@ public class AuthActivity extends AppCompatActivity {
                                         updateUI();
                                         mCheckRequestDatabaseReference.removeEventListener(valueEventListener);
                                     } else {
+                                        Log.w("Authentication:failed", task.getException());
                                         Toast.makeText(AuthActivity.this,
                                                 "Authentication Failed",
                                                 Toast.LENGTH_SHORT).show();

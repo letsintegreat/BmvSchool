@@ -1,14 +1,13 @@
 package com.school.seksaria.bmv;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -77,8 +76,8 @@ public class RequestActivity extends AppCompatActivity {
                                     DatabaseReference reference = FirebaseDatabase.getInstance()
                                             .getReference();
 
-                                    Query query = reference.child("request").orderByChild("token")
-                                            .equalTo(pending.getToken());
+                                    Query query = reference.child("request").orderByChild("fullName")
+                                            .equalTo(pending.getFullName());
                                     query.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -116,15 +115,13 @@ public class RequestActivity extends AppCompatActivity {
                             users.add(new User(
                                     (String) request.get("what"),
                                     (String) request.get("fullName"),
-                                    (int) request.get("classNumber"),
-                                    (String) request.get("token")
+                                    (int) request.get("classNumber")
                             ));
 
                             users.add(new User(
                                     (String) request.get("what"),
                                     (String) request.get("fullName"),
-                                    (int) request.get("classNumber"),
-                                    (String) request.get("token")
+                                    (int) request.get("classNumber")
                             ));
                         }
                     } else if (mUser.getWhat().equals("principal")) {
@@ -132,30 +129,26 @@ public class RequestActivity extends AppCompatActivity {
                             users.add(new User(
                                     (String) request.get("what"),
                                     (String) request.get("fullName"),
-                                    (int) request.get("classNumber"),
-                                    (String) request.get("token")
+                                    (int) request.get("classNumber")
                             ));
 
                             users.add(new User(
                                     (String) request.get("what"),
                                     (String) request.get("fullName"),
-                                    (int) request.get("classNumber"),
-                                    (String) request.get("token")
+                                    (int) request.get("classNumber")
                             ));
                         }
                     } else {
                         users.add(new User(
                                 (String) request.get("what"),
                                 (String) request.get("fullName"),
-                                (int) request.get("classNumber"),
-                                (String) request.get("token")
+                                (int) request.get("classNumber")
                         ));
 
                         users.add(new User(
                                 (String) request.get("what"),
                                 (String) request.get("fullName"),
-                                (int) request.get("classNumber"),
-                                (String) request.get("token")
+                                (int) request.get("classNumber")
                         ));
                     }
                 }

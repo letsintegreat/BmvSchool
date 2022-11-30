@@ -1,10 +1,10 @@
 package com.school.seksaria.bmv;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 public class ClassTakerActivity extends AppCompatActivity implements View.OnClickListener {
 

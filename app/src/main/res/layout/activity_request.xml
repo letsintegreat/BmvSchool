@@ -7,7 +7,7 @@
     android:background="@color/colorBackgroundPrimary"
     tools:context=".RequestActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_width="match_parent"
