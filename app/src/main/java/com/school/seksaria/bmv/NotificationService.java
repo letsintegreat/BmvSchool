@@ -55,7 +55,7 @@ public class NotificationService extends Service {
 
                         if (mUser.getFullName() != message.getUserName()) {
                             Intent intent = new Intent(NotificationService.this, MainActivity.class);
-                            PendingIntent pIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, 0);
+                            PendingIntent pIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                             Notification notification = new Notification.Builder(NotificationService.this)
                                     .setContentTitle("New Message from " + message.getUserName())
@@ -87,7 +87,7 @@ public class NotificationService extends Service {
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Holiday holiday = dataSnapshot.getValue(Holiday.class);
                         Intent intent = new Intent(NotificationService.this, MainActivity.class);
-                        PendingIntent pIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, 0);
+                        PendingIntent pIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                         Notification notification = new Notification.Builder(NotificationService.this)
                                 .setContentTitle(holiday.getTag())
@@ -124,7 +124,7 @@ public class NotificationService extends Service {
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Holiday holiday = dataSnapshot.getValue(Holiday.class);
                         Intent intent = new Intent(NotificationService.this, MainActivity.class);
-                        PendingIntent pIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, 0);
+                        PendingIntent pIntent = PendingIntent.getActivity(NotificationService.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                         Notification notification = new Notification.Builder(NotificationService.this)
                                 .setContentTitle(holiday.getTag() + " Homework")
